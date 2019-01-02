@@ -7,31 +7,42 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: () => import('./views/Home.vue'),
+      component: () => import('./views/Home/Index.vue'),
       children: [
         {
           path: '',
-          redirect: '/films'
+          redirect: '/films/nowPlaying'
         },
         {
           path: 'films',
-          name: 'films',
-          component: () => import('./views/HomeFilms.vue')
+          component: () => import('./views/Home/Films/Index.vue'),
+          children: [
+            {
+              path: 'nowPlaying',
+              name: 'nowPlaying',
+              component: () => import('./views/Home/Films/NowPlaying.vue')
+            },
+            {
+              path: 'comingSoon',
+              name: 'comingSoon',
+              component: () => import('./views/Home/Films/ComingSoon.vue')
+            }
+          ]
         },
         {
           path: 'cinemas',
           name: 'cinemas',
-          component: () => import('./views/HomeCinemas.vue')
+          component: () => import('./views/Home/Cinemas/Index.vue')
         },
         {
           path: 'todo',
           name: 'todo',
-          component: () => import('./views/HomeTodo.vue')
+          component: () => import('./views/Home/Todo/Index.vue')
         },
         {
           path: 'center',
           name: 'center',
-          component: () => import('./views/HomeCenter.vue')
+          component: () => import('./views/Home/Center/Index.vue')
         }
       ]
     }
