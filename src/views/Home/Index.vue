@@ -15,10 +15,10 @@ export default {
   data () {
     return {
       tabs: [
-        {id: 'films', name: '电影', icon: "icon-films"},
-        {id: 'cinemas', name: '影院', icon: "icon-cinemas"},
-        {id: 'todo', name: 'todo', icon: "icon-sales"},
-        {id: 'center', name: 'center', icon: "icon-center"},
+        { id: 'films', name: '电影', icon: 'icon-films' },
+        { id: 'cinemas', name: '影院', icon: 'icon-cinemas' },
+        { id: 'todo', name: 'todo', icon: 'icon-sales' },
+        { id: 'center', name: '我的', icon: 'icon-center' },
       ]
     }
   },

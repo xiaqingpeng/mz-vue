@@ -19,7 +19,8 @@ instance.interceptors.request.use(
 // 响应拦截
 instance.interceptors.response.use(
   response => {
-    return response;
+    // 直接返回 response.data 数据
+    return response.data;
   },
   error => {
     return Promise.reject(error);
