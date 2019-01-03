@@ -1,12 +1,20 @@
 <template>
   <div class="home-cinemas">
-    影院
+    <LvHeader title="影院"></LvHeader>
+
+
   </div>
 </template>
 
 <script>
+import LvHeader from '@/components/Header';
+
 export default {
-  name: 'HomeCinemas'
+  name: 'HomeCinemas',
+
+  components: {
+    LvHeader
+  }
 }
 </script>
 
