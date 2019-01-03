@@ -18,6 +18,10 @@ export default new Router({
           component: () => import('./views/Home/Films/Index.vue'),
           children: [
             {
+              path: '',
+              redirect: '/films/nowPlaying'
+            },
+            {
               path: 'nowPlaying',
               name: 'nowPlaying',
               component: () => import('./views/Home/Films/NowPlaying.vue')

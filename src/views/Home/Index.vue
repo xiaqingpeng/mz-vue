@@ -2,29 +2,29 @@
   <div class="home">
     <router-view></router-view>
 
-    <Tabbar :tabs="tabs"></Tabbar>
+    <LvTabbar :tabs="tabs"></LvTabbar>
   </div>
 </template>
 
 <script>
-import Tabbar from '@/components/Tabbar';
+import LvTabbar from '@/components/Tabbar';
 
 export default {
   name: 'Home',
 
+  components: {
+    LvTabbar
+  },
+
   data () {
     return {
       tabs: [
-        { id: 'films', name: '电影', icon: 'icon-films' },
-        { id: 'cinemas', name: '影院', icon: 'icon-cinemas' },
-        { id: 'todo', name: 'todo', icon: 'icon-sales' },
-        { id: 'center', name: '我的', icon: 'icon-center' },
+        { id: 'films', name: '电影', icon: 'icon-films', href: '/films' },
+        { id: 'cinemas', name: '影院', icon: 'icon-cinemas', href: '/cinemas' },
+        { id: 'todo', name: 'todo', icon: 'icon-sales', href: '/todo' },
+        { id: 'center', name: '我的', icon: 'icon-center', href: '/center' },
       ]
     }
-  },
-
-  components: {
-    Tabbar
   }
 }
 </script>
