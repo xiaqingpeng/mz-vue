@@ -1,6 +1,11 @@
 <template>
   <div class="home-films">
 
+    <div class="city-fixed">
+      <span>深圳</span>
+      <i class="iconfont icon-xiala"></i>
+    </div>
+
     <LvHeader title="电影" v-show="showHeader"></LvHeader>
 
     <van-swipe :autoplay="3000">
@@ -11,10 +16,10 @@
 
     <div class="tabs-wrapper" :style="{top: showHeader ? '44px' : '0'}">
       <ul class="tabs">
-        <li class="tabs-item active">正在热映</li>
-        <li class="tabs-item">即将上映</li>
+        <router-link to="/films/nowPlaying" active-class="active" class="tabs-item">正在热映</router-link>
+        <router-link to="/films/comingSoon" active-class="active" class="tabs-item">即将上映</router-link>
       </ul>
-      <div class="link">
+      <div class="link" :style="{left: $route.name === 'comingSoon' ? '50%' : '0px'}">
         <span></span>
       </div>
     </div>
@@ -118,8 +123,10 @@ export default {
     .link {
       position: absolute;
       z-index: 3001;
+      left: 0;
       bottom: 0;
       width: 50%;
+      transition: left 0.3s ease;
       span {
         display: block;
         width: 56px;
@@ -196,6 +203,23 @@ export default {
         border-radius: 4px;
       }
     }
+  }
+
+  .city-fixed {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 18px;
+    left: 7px;
+    color: #fff;
+    z-index: 10;
+    font-size: 13px;
+    background: rgba(0,0,0,.2);
+    height: 30px;
+    line-height: 30px;
+    border-radius: 15px;
+    text-align: center;
+    padding: 0 5px;
   }
 }
 </style>
