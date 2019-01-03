@@ -1,12 +1,15 @@
 <template>
   <div class="home-films">
+
+    <LvHeader title="电影" v-show="showHeader"></LvHeader>
+
     <van-swipe :autoplay="3000">
       <van-swipe-item v-for="item in banners" :key="item.bannerId">
         <img :src="item.imgUrl" alt="" />
       </van-swipe-item>
     </van-swipe>
 
-    <div class="tabs-wrapper">
+    <div class="tabs-wrapper" :style="{top: showHeader ? '44px' : '0'}">
       <ul class="tabs">
         <li class="tabs-item active">正在热映</li>
         <li class="tabs-item">即将上映</li>
@@ -24,15 +27,21 @@
 
 <script>
 import Vue from 'vue';
+import LvHeader from '@/components/Header';
 import { Swipe, SwipeItem } from 'vant';
 Vue.use(Swipe).use(SwipeItem);
 
 export default {
   name: 'HomeFilms',
 
+  components: {
+    LvHeader
+  },
+
   data () {
     return {
       banners: [], // 轮播图图片
+      showHeader: false, // 显示顶部Header
     }
   },
 
@@ -47,11 +56,25 @@ export default {
             this.banners = res.data;
           }
         })
+    },
+
+    /**
+     * 滚动事件的处理函数
+     * 用来处理顶部显示
+     */
+    onScroll () {
+      let scrollTop = document.documentElement.scrollTop;
+      if (scrollTop >= 210) {
+        this.showHeader = true;
+      } else {
+        this.showHeader = false;
+      }
     }
   },
 
   created () {
     this.getBanner();
+    window.onscroll = this.onScroll;
   }
 }
 </script>
@@ -69,7 +92,11 @@ export default {
 
   .tabs-wrapper {
     @include border-bottom-1px;
+    position: sticky;
+    top: 0;
+    z-index: 3000;
     height: 50px;
+    background-color: #fff;
     .tabs {
       display: flex;
       height: 100%;
@@ -90,13 +117,14 @@ export default {
     }
     .link {
       position: absolute;
+      z-index: 3001;
       bottom: 0;
       width: 50%;
       span {
         display: block;
         width: 56px;
-        height: 2px;
-        background: #ff5f16;
+        border-bottom: 2px solid #ff5f16;
+        border-radius: 20px;
         margin: 0 auto;
         overflow: hidden;
       }
@@ -104,6 +132,8 @@ export default {
   }
 
   .film-list-content {
+    background-color: #fff;
+    margin-bottom: 60px;
     ul {
       li {
         @include border-bottom-1px;
@@ -122,6 +152,7 @@ export default {
       }
 
       .info {
+        flex: 1;
         min-width: 100px;
         padding: 0 10px;
         font-size: 14px;
