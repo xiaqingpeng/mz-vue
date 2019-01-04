@@ -33,10 +33,10 @@ export default {
 
   data () {
     return {
-      pageNum: 1,     // 当前页码
-      pageSize: 10,   // 每页显示条数
-      totalPages: 0,  // 总页数
-      films: [],      // 影片数据
+      pageNum: 1, // 当前页码
+      pageSize: 10, // 每页显示条数
+      totalPages: 0, // 总页数
+      films: [], // 影片数据
     }
   },
 
