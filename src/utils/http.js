@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Toast } from 'vant';
 
 // 创建 axios 实例
 const instance = axios.create({
@@ -23,6 +24,7 @@ instance.interceptors.response.use(
     return response.data;
   },
   error => {
+    Toast.fail(error.message);
     return Promise.reject(error);
   }
 )

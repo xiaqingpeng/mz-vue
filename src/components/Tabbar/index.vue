@@ -1,16 +1,19 @@
 <template>
-  <ul class="tabbar">
-    <li v-for="tab in tabs"
-      :key="tab.id">
+  <ul class="lv-tabbar">
+    <router-link
+      tag="li"
+      v-for="tab in tabs"
+      :key="tab.id"
+      :to="tab.href">
       <i :class="['iconfont', tab.icon]"></i>
       <span>{{ tab.name }}</span>
-    </li>
+    </router-link>
   </ul>
 </template>
 
 <script>
 export default {
-  name: 'tabbar',
+  name: 'LvTabbar',
 
   props: {
     tabs: {
@@ -26,7 +29,7 @@ export default {
 <style lang="scss">
 @import '@/styles/common/mixins.scss';
 
-.tabbar {
+.lv-tabbar {
   @include border-top-1px;
   position: fixed;
   bottom: 0;
@@ -50,6 +53,10 @@ export default {
     span {
       font-size: 10px;
       margin-top: 2px;
+    }
+
+    &.router-link-active {
+      color: #ff5f16;
     }
   }
 }

@@ -3,12 +3,15 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import http from './utils/http';
+import { Toast } from 'vant';
 
 import './styles/base.scss';
 
 Vue.config.productionTip = false;
 // 给Vue原型上绑定 axios 实例。
 Vue.prototype.$http = http;
+// 给Vue原型上绑定 Toast 。
+Vue.prototype.$Toast = Toast;
 
 new Vue({
   router,

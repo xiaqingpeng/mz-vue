@@ -1,42 +1,58 @@
 <template>
   <div class="warp">
-    <ul>
-      <li>
-        <div class="img">
-          <img src="" alt="" />
-        </div>
-        <div class="info">
-          <div>
-            <span class="name">海王</span>
-            <span class="type">3D</span>
+    <van-list
+      v-model="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="getList"
+      >
+      <ul>
+        <li v-for="film in films"
+          :key="film.filmId">
+          <div class="img">
+            <img :src="film.poster" alt="" />
           </div>
-          <div>
-            <span class="label">观众评分</span>
-            <span class="grade">7</span>
+          <div class="info">
+            <div>
+              <span class="name">{{ film.name }}</span>
+              <span class="type">{{ film.filmType && film.filmType.name }}</span>
+            </div>
+            <div>
+              <span class="label">观众评分</span>
+              <span class="grade">{{ film.grade }}</span>
+            </div>
+            <div>
+              <span class="label">主演： {{ film.actors }}</span>
+            </div>
+            <div>
+              <span class="label">{{ film.nation }} | {{ film.runtime }}分钟</span>
+            </div>
           </div>
-          <div>
-            <span class="label">主演： 帕特里克·威尔森 妮可·基德曼 杜夫·龙格尔 温子仁 杰森·莫玛 安柏·赫德</span>
-          </div>
-          <div>
-            <span class="label">美国 澳大利亚 | 143分钟</span>
-          </div>
-        </div>
-        <div class="buy">购票</div>
-      </li>
-    </ul>
+          <div class="buy">购票</div>
+        </li>
+      </ul>
+    </van-list>
   </div>
 </template>
 
 <script>
+import Vue from 'vue';
+import { List } from 'vant';
+
+Vue.use(List);
+
 export default {
   name: 'NowPlaying',
 
   data () {
     return {
-      pageNum: 1, // 当前页码
+      pageNum: 0, // 当前页码
       pageSize: 10, // 每页显示条数
-      totalPages: 0, // 总页数
+      totalPages: 2, // 总页数
       films: [], // 影片数据
+
+      loading: false,
+      finished: false,
     }
   },
 
@@ -45,23 +61,31 @@ export default {
      * 获取影片数据
      */
     getList () {
+      this.pageNum++;
+
       this.$http.get('/api/film', {
         params: {
           type: 1,
-          pageNum: 1,
-          pageSize: 10,
+          pageNum: this.pageNum,
+          pageSize: this.pageSize,
         }
       }).then(res => {
         if (res.code === 0) {
-          // 设置
-          this.total = res.total;
+          // 设置总页数
+          this.totalPages = Math.ceil(res.data.total / this.pageSize);
+          this.films = this.films.concat(res.data.films);
+        } else {
+          this.$Toast.fail(res.msg);
+        }
+
+        // 加载状态结束
+        this.loading = false;
+
+        if (this.pageNum >= this.totalPages) {
+          this.finished = true;
         }
       })
     }
-  },
-
-  created () {
-    this.getList();
   }
 };
 </script>
