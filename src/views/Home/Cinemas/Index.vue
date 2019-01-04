@@ -2,7 +2,6 @@
   <div class="home-cinemas">
     <LvHeader title="影院"></LvHeader>
 
-
   </div>
 </template>
 

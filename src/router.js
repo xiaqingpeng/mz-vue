@@ -49,6 +49,10 @@ export default new Router({
           component: () => import('./views/Home/Center/Index.vue')
         }
       ]
+    },
+    {
+      path: '/login',
+      component: () => import('./views/Login/Index.vue')
     }
   ]
 })
