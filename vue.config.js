@@ -1,4 +1,6 @@
 module.exports = {
+  baseUrl: process.env.NODE_ENV === 'development' ? '/' : '/mz-vue/',
+
   devServer: {
     proxy: {
       '/api': {
