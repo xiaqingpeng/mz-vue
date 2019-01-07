@@ -4,7 +4,9 @@ import { Toast } from 'vant';
 console.log(process.env);
 // 创建 axios 实例
 const instance = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? '' : 'http://58.87.126.209:9090'
+  baseURL: process.env.NODE_ENV === 'production'
+    ? 'http://58.87.126.209:9090'
+    : 'http://58.87.126.209:9090'
 });
 
 // 请求拦截

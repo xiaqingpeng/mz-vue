@@ -53,6 +53,10 @@ export default new Router({
     {
       path: '/login',
       component: () => import('./views/Login/Index.vue')
+    },
+    {
+      path: '/city',
+      component: () => import('./views/City/Index.vue')
     }
   ]
 })
