@@ -1,10 +1,10 @@
 <template>
   <div class="home-films">
 
-    <div class="city-fixed">
+    <router-link tag="div" to="/city" class="city-fixed">
       <span>深圳</span>
       <i class="iconfont icon-xiala"></i>
-    </div>
+    </router-link>
 
     <LvHeader title="电影" v-show="showHeader"></LvHeader>
 

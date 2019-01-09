@@ -1,7 +1,7 @@
 <template>
   <div class="home-center">
     <div class="avatar">
-      <img src="" class="avator-icon" />
+      <img @click="aa" src="" class="avator-icon" />
       <div class="nick-name">立即登录</div>
     </div>
 
@@ -25,7 +25,13 @@
 
 <script>
 export default {
-  name: 'HomeCenter'
+  name: 'HomeCenter',
+
+  methods: {
+    aa() {
+      console.log(1);
+    }
+  }
 }
 </script>
 

@@ -83,7 +83,7 @@
             <li>安康</li>
             <li>安康</li>
             <li>安康</li>
-            <li>安康</li>
+            <li>{{filterCitys}}</li>
           </ul>
         </li>
       </ul>
@@ -129,7 +129,29 @@ export default {
     ]),
     ...mapGetters('city', [
       'hotCitys'
-    ])
+    ]),
+    filterCitys () {
+      let hash = {};
+      let i = 0;
+      let res = [];
+
+      this.allCitys.forEach(item => {
+        let firstLetter = item.pinyin.toUpperCase().substring(0, 1);
+
+        if (hash[firstLetter]) {
+          // 存在
+          res[hash[firstLetter] - 1].list.push(item);
+        } else {
+          hash[firstLetter] = ++i;
+          // 不存在
+          res.push({
+            firstLetter,
+            list: [item]
+          })
+        }
+      });
+      return res;
+    }
   }
 }
 </script>
@@ -145,6 +167,7 @@ export default {
 
   .lv-indexlist {
     width: 100%;
+    height: 100%;
     flex: 1;
     display: flex;
     background: #fff;
@@ -213,7 +236,7 @@ export default {
         flex-wrap: wrap;
 
         .city-item-detail {
-          width: calc((100vw - 33px)/3);
+          width: 33.33%;
           text-align: center;
           padding-bottom: 15px;
           box-sizing: border-box;
